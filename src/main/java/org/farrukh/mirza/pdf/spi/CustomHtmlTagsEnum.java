@@ -25,63 +25,63 @@ package org.farrukh.mirza.pdf.spi;
  * @date 27/09/2018 Dublin, Ireland
  */
 public enum CustomHtmlTagsEnum {
-	REPEAT("<repeat>", "</repeat>"), LOOP("<loop>", "</loop>");
+    REPEAT("<repeat>", "</repeat>"), LOOP("<loop>", "</loop>");
 
-	private String start;
-	private String end;
+    private String start;
+    private String end;
 
-	private CustomHtmlTagsEnum(String start, String end) {
-		this.start = start;
-		this.end = end;
-	}
+    CustomHtmlTagsEnum(String start, String end) {
+        this.start = start;
+        this.end = end;
+    }
 
-	public String start() {
-		return start;
-	}
+    public String start() {
+        return start;
+    }
 
-	public String end() {
-		return end;
-	}
+    public String end() {
+        return end;
+    }
 
-	public boolean isStartPresent(String html) {
-		return html.toLowerCase().indexOf(start) >= 0;
-	}
+    public boolean isStartPresent(String html) {
+        return html.toLowerCase().contains(start);
+    }
 
-	public boolean isEndPresent(String html) {
-		return html.toLowerCase().indexOf(end) >= 0;
-	}
+    public boolean isEndPresent(String html) {
+        return html.toLowerCase().contains(end);
+    }
 
-	public boolean isPresent(String html) {
-		return isStartPresent(html) || isEndPresent(html);
-	}
+    public boolean isPresent(String html) {
+        return isStartPresent(html) || isEndPresent(html);
+    }
 
-	/*
-	 * Both start and end tags are present end tag appears after the start tag
-	 * finishes tag may not have any child tags
-	 */
-	public boolean isPresentAndValid(String html) {
-		return isStartPresent(html) && isEndPresent(html)
-				&& (html.toLowerCase().indexOf(end) >= (html.toLowerCase().indexOf(start) + start.length()));
-	}
+    /*
+     * Both start and end tags are present end tag appears after the start tag
+     * finishes tag may not have any child tags
+     */
+    public boolean isPresentAndValid(String html) {
+        return isStartPresent(html) && isEndPresent(html)
+                && (html.toLowerCase().indexOf(end) >= (html.toLowerCase().indexOf(start) + start.length()));
+    }
 
-	/*
-	 * Return everything between start and end
-	 */
-	public String getInnerHtml(String html) {
-		return html.substring((html.toLowerCase().indexOf(start) + start.length()), html.toLowerCase().indexOf(end));
-	}
+    /*
+     * Return everything between start and end
+     */
+    public String getInnerHtml(String html) {
+        return html.substring((html.toLowerCase().indexOf(start) + start.length()), html.toLowerCase().indexOf(end));
+    }
 
-	/*
-	 * Return everything between start and end, including the tags
-	 */
-	public String getTagWithInnerHtmlSubstring(String html) {
-		return html.substring(html.toLowerCase().indexOf(start), (html.toLowerCase().indexOf(end) + end.length()));
-	}
-	
-	/*
-	 * Replace everything in <param>html</param> between start and end, including the tags, with the replacement String provided
-	 */
-	public String replaceTagWithInnerHtmlByReplacement(String html, String replacement) {
-		return html.substring(0, html.toLowerCase().indexOf(start)) + replacement + html.substring((html.toLowerCase().indexOf(end) + end.length()));
-	}
+    /*
+     * Return everything between start and end, including the tags
+     */
+    public String getTagWithInnerHtmlSubstring(String html) {
+        return html.substring(html.toLowerCase().indexOf(start), (html.toLowerCase().indexOf(end) + end.length()));
+    }
+
+    /*
+     * Replace everything in <param>html</param> between start and end, including the tags, with the replacement String provided
+     */
+    public String replaceTagWithInnerHtmlByReplacement(String html, String replacement) {
+        return html.substring(0, html.toLowerCase().indexOf(start)) + replacement + html.substring((html.toLowerCase().indexOf(end) + end.length()));
+    }
 }

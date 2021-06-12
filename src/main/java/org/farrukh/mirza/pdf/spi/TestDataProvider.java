@@ -20,21 +20,21 @@
 
 /**
  * @author Farrukh Mirza
- * 24/06/2016 
+ * 24/06/2016
  * Dublin, Ireland
  */
 package org.farrukh.mirza.pdf.spi;
 
 public interface TestDataProvider {
 
-	public String getTestDataObject();
+    public String getTestDataObject();
 
-	public String getTestDataArray();
+    public String getTestDataArray();
 
-	public String getHtmlTemplateDoc();
+    public String getHtmlTemplateDoc();
 
-	public String getHtmlDoc();
+    public String getHtmlDoc();
 
-	public String getCssDoc();
+    public String getCssDoc();
 
 }

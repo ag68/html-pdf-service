@@ -20,7 +20,7 @@
 
 /**
  * @author Farrukh Mirza
- * 24/06/2016 
+ * 24/06/2016
  * Dublin, Ireland
  */
 package org.farrukh.mirza.pdf.spi;
@@ -30,12 +30,12 @@ import java.util.List;
 
 public interface Converter {
 
-	public void convertHtmlToPdf(List<String> htmls, OutputStream out);
+    public void convertHtmlToPdf(List<String> htmls, OutputStream out);
 
-	public void convertHtmlToPdf(List<String> htmls, String css, OutputStream out);
+    public void convertHtmlToPdf(List<String> htmls, String css, OutputStream out);
 
-	
-	public void convertHtmlToPdf(String html, OutputStream out);
+    public void convertHtmlToPdf(String html, OutputStream out);
 
-	public void convertHtmlToPdf(String html, String css, OutputStream out);
+    public void convertHtmlToPdf(String html, String css, OutputStream out);
+
 }

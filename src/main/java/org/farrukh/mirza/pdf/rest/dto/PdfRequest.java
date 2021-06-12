@@ -20,7 +20,7 @@
 
 /**
  * @author Farrukh Mirza
- * 24/06/2016 
+ * 24/06/2016
  * Dublin, Ireland
  */
 package org.farrukh.mirza.pdf.rest.dto;
@@ -29,33 +29,32 @@ import java.io.Serializable;
 
 public class PdfRequest implements Serializable {
 
-	private String html;
-	private String css;
-	private String json;
+    private String html;
+    private String css;
+    private String json;
 
-	public String getHtml() {
-		return html;
-	}
+    public String getHtml() {
+        return html;
+    }
 
-	public void setHtml(String html) {
-		this.html = html;
-	}
+    public void setHtml(String html) {
+        this.html = html;
+    }
 
-	public String getCss() {
-		return css;
-	}
+    public String getCss() {
+        return css;
+    }
 
-	public void setCss(String css) {
-		this.css = css;
-	}
+    public void setCss(String css) {
+        this.css = css;
+    }
 
-	public String getJson() {
-		return json;
-	}
+    public String getJson() {
+        return json;
+    }
 
-	public void setJson(String json) {
-		this.json = json;
-	}
+    public void setJson(String json) {
+        this.json = json;
+    }
 
-	
 }

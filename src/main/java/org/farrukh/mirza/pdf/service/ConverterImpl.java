@@ -21,18 +21,11 @@
 
 /**
  * @author Farrukh Mirza
- * 24/06/2016 
+ * 24/06/2016
  * Dublin, Ireland
  */
 package org.farrukh.mirza.pdf.service;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
 import org.farrukh.mirza.pdf.spi.Converter;
 import org.slf4j.Logger;
@@ -40,63 +33,68 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.List;
+
 @Service
 public class ConverterImpl extends BaseImpl implements Converter {
-	private static final Logger logger = LoggerFactory.getLogger(ConverterImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ConverterImpl.class);
 
-	@Override
-	public void convertHtmlToPdf(String html, OutputStream out) {
-		convertHtmlToPdf(html, null, out);
-	}
+    @Override
+    public void convertHtmlToPdf(String html, OutputStream out) {
+        convertHtmlToPdf(html, null, out);
+    }
 
-	@Override
-	public void convertHtmlToPdf(String html, String css, OutputStream out) {
-		try {
-			html = correctHtml(html);
-			html = getFormedHTMLWithCSS(html, css);
+    @Override
+    public void convertHtmlToPdf(String html, String css, OutputStream out) {
+        try {
+            html = correctHtml(html);
+            html = getFormedHTMLWithCSS(html, css);
 
-			//This ITextRenderer is from the Flying Saucer library under LGPL license.
-			//Should not be confused with the actual iText library.
-			ITextRenderer r = new ITextRenderer();
-			r.setDocumentFromString(html);
-			r.layout();
-			r.createPDF(out);
-			r.finishPDF();
+            //This ITextRenderer is from the Flying Saucer library under LGPL license.
+            //Should not be confused with the actual iText library.
+            ITextRenderer r = new ITextRenderer();
+            r.setDocumentFromString(html);
+            r.layout();
+            r.createPDF(out);
+            r.finishPDF();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getMessage(), e);
-		}
-	}
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+        }
+    }
 
-	@Override
-	public void convertHtmlToPdf(List<String> htmls, OutputStream out) {
-		convertHtmlToPdf(htmls, null, out);
-	}
+    @Override
+    public void convertHtmlToPdf(List<String> htmls, OutputStream out) {
+        convertHtmlToPdf(htmls, null, out);
+    }
 
-	@Override
-	public void convertHtmlToPdf(List<String> htmls, String css, OutputStream out) {
-		try {
-			PDFMergerUtility merge = new PDFMergerUtility();
+    @Override
+    public void convertHtmlToPdf(List<String> htmls, String css, OutputStream out) {
+        try {
+            PDFMergerUtility merge = new PDFMergerUtility();
 
-			for (String html : htmls) {
-				ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            for (String html : htmls) {
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
-				// convertHtmlToPdf() performs null check on css by default, so
-				// no need to do it here.
-				convertHtmlToPdf(html, css, bos);
+                // convertHtmlToPdf() performs null check on css by default, so
+                // no need to do it here.
+                convertHtmlToPdf(html, css, bos);
 
-				ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
-				merge.addSource(bis);
-			}
+                ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
+                merge.addSource(bis);
+            }
 
-			merge.setDestinationStream(out);
-			merge.mergeDocuments(null);
-		} catch (IOException e) {
-			e.printStackTrace();
-			logger.error(e.getMessage(), e);
-		}
-	}
-
+            merge.setDestinationStream(out);
+            merge.mergeDocuments(null);
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+        }
+    }
 
 }

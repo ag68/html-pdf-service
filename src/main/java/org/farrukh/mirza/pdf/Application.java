@@ -20,7 +20,7 @@
 
 /**
  * @author Farrukh Mirza
- * 24/06/2016 
+ * 24/06/2016
  * Dublin, Ireland
  */
 package org.farrukh.mirza.pdf;
@@ -30,16 +30,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
+
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(Application.class);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(Application.class);
+    }
 
-	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(Application.class, args);
-	}
+    public static void main(String[] args) {
+        ApplicationContext ctx = SpringApplication.run(Application.class, args);
+    }
 
 }
